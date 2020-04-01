@@ -78,9 +78,9 @@ kubectl run nginx --image = nginx --restart=Never --dry-run -o yaml | kubectl cr
 <p> 
 
 ```bash 
-kubectl run busybox --image=busybox --command --restart=Never -it --env ＃-it出力を確認するには
+kubectl run busybox --image=busybox --command --restart=Never -it -- env ＃-it出力を確認するには
 ＃または、-it 
-kubectl run busybox --image=busybox --command --restart=Never --env 
+kubectl run busybox --image=busybox --command --restart=Never -- env 
 ＃なしで実行してから、
 kubectl logs busybox 
 ``` 

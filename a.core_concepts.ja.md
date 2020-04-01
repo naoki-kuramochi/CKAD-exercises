@@ -66,6 +66,10 @@ kubectl create -f pod.yaml -n mynamespace
 kubectl run nginx --image = nginx --restart=Never --dry-run -o yaml | kubectl create -n mynamespace -f -
 ``` 
 </p> 
+<p>
+`--dry-run`を指定すると最小構成のマニフェストを吐き出してくれる様になる
+</p>
+
 </details> 
 
 ### コマンド「env」を実行するbusyboxポッドを作成します(kubectlコマンドを使用)。それを実行して、出力

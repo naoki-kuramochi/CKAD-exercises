@@ -95,7 +95,7 @@ kubectl logs busybox
 
 ```bash 
 ＃このコマンドでYAMLテンプレートを作成します
-kubectl run busybox --image=busybox --restart=Never --dry-run -o yaml --command --env > envpod.yaml 
+kubectl run busybox --image=busybox --restart=Never --dry-run -o yaml --command -- env > envpod.yaml 
 ＃参照してください
 cat envpod.yaml 
 ``` 

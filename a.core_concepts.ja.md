@@ -142,6 +142,7 @@ kubectl create namespace myns -o yaml --dry-run
 
 ### 新しいResourceQuotaためのYAMLは、1つのCPUのハード制限に'myrqを'と呼ばれる取得作成せずに1Gメモリと2つのポッド
 
+see: https://cstoku.dev/posts/2018/k8sdojo-15/#resourcequota
 <details> <summary> show </summary> 
 <p> 
 

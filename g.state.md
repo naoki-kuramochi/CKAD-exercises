@@ -9,6 +9,11 @@ kubernetes.io > Documentation > Tasks > Configure Pods and Containers > [Configu
 
 ### Create busybox pod with two containers, each one will have the image busybox and will run the 'sleep 3600' command. Make both containers mount an emptyDir at '/etc/foo'. Connect to the second busybox, write the first column of '/etc/passwd' file to '/etc/foo/passwd'. Connect to the first busybox and write '/etc/foo/passwd' file to standard output. Delete pod.
 
+訳：
+2つのコンテナを持つbusyboxポッドを作成し、それぞれのコンテナにbusyboxのイメージを持たせ、'sleep 3600'コマンドを実行します。
+
+両方のコンテナに '/etc/foo' に emptyDir をマウントします。2つ目のbusyboxに接続し、'/etc/foo/passwd'ファイルの最初のカラムを'/etc/foo/passwd'に書き込む。最初のビジーボックスに接続し、標準出力に'/etc/foo/passwd'ファイルを書き込む。podを削除します。
+
 <details><summary>show</summary>
 <p>
 
@@ -16,11 +21,16 @@ kubernetes.io > Documentation > Tasks > Configure Pods and Containers > [Configu
 
 Easiest way to do this is to create a template pod with:
 
+訳： *この質問は「マルチコンテナポッド」のセクションの方が適しているかもしれませんが、状態を知るのに役立つと思うので、ここに置いておきます*。
+
+でテンプレートポッドを作成するのが一番簡単な方法です。
+
 ```bash
 kubectl run busybox --image=busybox --restart=Never -o yaml --dry-run -- /bin/sh -c 'sleep 3600' > pod.yaml
 vi pod.yaml
 ```
 Copy paste the container definition and type the lines that have a comment in the end:
+訳： コンテナの定義をコピペして、最後にコメントがある行を入力します。
 
 ```YAML
 apiVersion: v1
@@ -84,6 +94,8 @@ kubectl delete po busybox
 
 ### Create a PersistentVolume of 10Gi, called 'myvolume'. Make it have accessMode of 'ReadWriteOnce' and 'ReadWriteMany', storageClassName 'normal', mounted on hostPath '/etc/foo'. Save it on pv.yaml, add it to the cluster. Show the PersistentVolumes that exist on the cluster
 
+訳： 10GiのPersistentVolumeを作成します。accessModeを'ReadWriteOnce'と'ReadWriteMany'にし、storageClassNameを'normal'にし、hostPath '/etc/foo'にマウントします。pv.yamlに保存して、クラスタに追加します。クラスタ上に存在するPersistentVolumesを表示する
+
 <details><summary>show</summary>
 <p>
 
@@ -119,6 +131,8 @@ kubectl get pv
 </details>
 
 ### Create a PersistentVolumeClaim for this storage class, called mypvc, a request of 4Gi and an accessMode of ReadWriteOnce, with the storageClassName of normal, and save it on pvc.yaml. Create it on the cluster. Show the PersistentVolumeClaims of the cluster. Show the PersistentVolumes of the cluster
+
+訳： このストレージクラス用のPersistentVolumeClaimを作成します。mypvcという名前で、リクエストは4Gi、accessModeはReadWriteOnce、storageClassNameはnormalで、pvc.yamlに保存します。クラスタ上に作成します。クラスタのPersistentVolumeClaimsを表示します。クラスタのPersistentVolumesを表示します。
 
 <details><summary>show</summary>
 <p>
@@ -159,6 +173,8 @@ kubectl get pv # will show as 'Bound' as well
 
 ### Create a busybox pod with command 'sleep 3600', save it on pod.yaml. Mount the PersistentVolumeClaim to '/etc/foo'. Connect to the 'busybox' pod, and copy the '/etc/passwd' file to '/etc/foo/passwd'
 
+訳： sleep 3600」コマンドでbusyboxポッドを作成し、pod.yamlに保存します。PersistentVolumeClaim を '/etc/foo' にマウントする。busybox' pod に接続し、'/etc/passwd' ファイルを '/etc/foo/passwd' にコピーする。
+
 <details><summary>show</summary>
 <p>
 
@@ -170,6 +186,8 @@ vi pod.yaml
 ```
 
 Add the lines that finish with a comment:
+
+訳： コメントで終わる行を追加します。
 
 ```YAML
 apiVersion: v1
@@ -209,6 +227,8 @@ kubectl create -f pod.yaml
 
 Connect to the pod and copy '/etc/passwd' to '/etc/foo/passwd':
 
+訳： ポッドに接続し、「/etc/passwd」を「/etc/foo/passwd」にコピーします。
+
 ```bash
 kubectl exec busybox -it -- cp /etc/passwd /etc/foo/passwd
 ```
@@ -218,10 +238,14 @@ kubectl exec busybox -it -- cp /etc/passwd /etc/foo/passwd
 
 ### Create a second pod which is identical with the one you just created (you can easily do it by changing the 'name' property on pod.yaml). Connect to it and verify that '/etc/foo' contains the 'passwd' file. Delete pods to cleanup
 
+訳： 先ほど作成したものと同じ 2 つ目のポッドを作成します (pod.yaml の 'name' プロパティを変更することで簡単に作成できます)。これに接続して、「/etc/foo」に「passwd」ファイルが含まれていることを確認します。ポッドを削除してクリーンアップする
+
 <details><summary>show</summary>
 <p>
 
 Create the second pod, called busybox2:
+
+訳： busybox2と呼ばれる2つ目のポッドを作成します。
 
 ```bash
 vim pod.yaml
@@ -236,6 +260,8 @@ kubectl delete po busybox busybox2
 </details>
 
 ### Create a busybox pod with 'sleep 3600' as arguments. Copy '/etc/passwd' from the pod to your local folder
+
+訳： sleep 3600」を引数に、ビジーボックスポッドを作成します。ポッドから'/etc/passwd'をローカルフォルダにコピーします。
 
 <details><summary>show</summary>
 <p>
